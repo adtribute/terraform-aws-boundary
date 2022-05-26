@@ -19,6 +19,15 @@ EOF
   type = string
 }
 
+variable "bucket_kms_arn" {
+  description = <<EOF
+KMS arn for the bucket
+EOF
+
+  type = string
+}
+
+
 variable "desired_capacity" {
   default = 3
 
