@@ -1,4 +1,3 @@
-}
 
 locals {
   configuration = templatefile(
