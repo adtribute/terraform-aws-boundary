@@ -105,7 +105,7 @@ data "aws_iam_policy_document" "kms" {
 
     effect = "Allow"
 
-    resources = [data.aws_kms_key.auth.arn, var.bucket_kms_arn]
+    resources = [data.aws_kms_key.auth.arn]
   }
 }
 

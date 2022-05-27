@@ -224,7 +224,9 @@ data "aws_iam_policy_document" "controller" {
     actions = [
       "kms:Decrypt",
       "kms:DescribeKey",
-      "kms:Encrypt"
+      "kms:Encrypt",
+      "kms:GenerateDataKey",
+
     ]
 
     effect = "Allow"
