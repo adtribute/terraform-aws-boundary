@@ -19,6 +19,7 @@ EOF
   type = string
 }
 
+
 variable "desired_capacity" {
   default = 3
 

@@ -1,11 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.0"
-    }
-  }
-}
 
 locals {
   configuration = templatefile(
@@ -161,11 +153,11 @@ module "postgresql" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~> 3.4"
 
-  allocated_storage       = 5
+  allocated_storage       = 30
   backup_retention_period = 0
   backup_window           = "03:00-06:00"
   engine                  = "postgres"
-  engine_version          = "12.4"
+  engine_version          = "12.7"
   family                  = "postgres12"
   identifier              = "boundary"
   instance_class          = "db.t2.micro"
@@ -232,12 +224,14 @@ data "aws_iam_policy_document" "controller" {
     actions = [
       "kms:Decrypt",
       "kms:DescribeKey",
-      "kms:Encrypt"
+      "kms:Encrypt",
+      "kms:GenerateDataKey",
+
     ]
 
     effect = "Allow"
 
-    resources = [aws_kms_key.auth.arn, aws_kms_key.root.arn]
+    resources = [aws_kms_key.auth.arn, aws_kms_key.root.arn, var.bucket_kms_arn]
   }
 
   statement {
